@@ -1,94 +1,69 @@
-
 # Graph U-Net with Semi-Supervised Learning (GraphUnet-SS)
 
-Bu proje, **Graph U-Net** mimarisi ile protein ikincil yapı tahmini yapmak üzere geliştirilmiş bir derin öğrenme sistemidir. 
-Ana çalıştırılabilir dosya `results/deep_model.py` olup, `scripts` klasöründeki veri hazırlama, performans ölçümü ve özel GCN/GAT katman modüllerine bağlıdır.
+This project implements a Graph U-Net architecture for protein secondary structure prediction using semi-supervised learning. The system combines graph convolutional networks with U-Net style architecture for improved feature extraction from protein graphs.
 
----
-
-## 📂 Proje Yapısı
-
-```
+## 📂 Project Structure
 graph_unet_ss-main/
-    results/
-        deep_model.py                  # Ana model çalıştırma dosyası
-    scripts/
-        gends.py                        # Veri üretme ve hazırlama scripti
-        generate_n_window_dataset_for_fullpredict.py # Sliding window veri seti üretici
-        performance_metrics.py          # Performans metrikleri
-        layers_gcn/                     
-            graph_attention_cnn_layer.py
-            graph_cnn_layer.py
-            graph_convolutional_recurrent_layer.py
-            graph_ops.py
-            multi_graph_attention_cnn_layer.py
-            multi_graph_cnn_layer.py
-```
+results/
+deep_model.py # Main model execution file
+scripts/
+gends.py # Data generation and preparation
+generate_n_window_dataset_for_fullpredict.py # Sliding window dataset
+performance_metrics.py # Evaluation metrics
+layers_gcn/ # Custom graph layers
+graph_attention_cnn_layer.py
+graph_cnn_layer.py
+graph_convolutional_recurrent_layer.py
+graph_ops.py
+multi_graph_attention_cnn_layer.py
+multi_graph_cnn_layer.py
 
----
+text
 
-## 🔧 Gereksinimler
+## 🔧 Installation
 
-Aşağıdaki Python kütüphanelerinin kurulu olması gerekir:
+### Requirements
+- Python 3.7+
+- TensorFlow >= 2.x
+- Keras (TensorFlow integrated)
+- scikit-optimize
+- numpy
 
+Install dependencies:
 ```bash
 pip install numpy tensorflow keras scikit-optimize
-```
+🚀 Usage
+Clone the repository:
 
-TensorFlow sürümü: >= 2.x  
-Keras: TensorFlow ile entegre sürüm  
-Python: 3.7+ (kod içerisinde Python 3.6 uyumlu `pyc` dosyaları mevcut)
+bash
+git clone https://github.com/ysngrmz/graph_unet_ss.git
+cd graph_unet_ss
+Run the main model:
 
----
+bash
+cd results
+python deep_model.py
+📜 Key Files
+deep_model.py: Main training script with CNN, LSTM, and GraphCNN/GAT layers
 
-## 🚀 Çalıştırma Adımları
+gends.py: Data preparation and generation
 
-1. **Depoyu klonlayın veya zip olarak indirin**:
-    ```bash
-    git clone https://github.com/ysngrmz/graph_unet_ss.git
-    cd graph_unet_ss
-    ```
+generate_n_window_dataset_for_fullpredict.py: Creates windowed datasets
 
-2. **Bağımlılıkları yükleyin**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    Eğer `requirements.txt` yoksa yukarıda belirtilen paketleri manuel kurun.
+performance_metrics.py: Evaluation metrics calculation
 
-3. **Modeli çalıştırın**:
-    ```bash
-    cd results
-    python deep_model.py
-    ```
+layers_gcn/: Custom graph neural network layers
 
-`deep_model.py`, `../scripts/` ve `../scripts/layers_gcn/` dizinlerini **sys.path** içine ekleyerek özel modülleri yükler.  
-Eğitim sırasında veri hazırlama (`gends.py`) ve özel GNN katman tanımları (`graph_*_layer.py`) kullanılır.
+🧪 Features
+Graph U-Net architecture for protein structure prediction
 
----
+Semi-supervised learning approach
 
-## 📜 Dosya Açıklamaları
+Bayesian hyperparameter optimization
 
-- **deep_model.py** → Ana eğitim ve model tanım dosyası. CNN, LSTM, GraphCNN/GAT katmanları ve Bayes optimizasyonu içerir.
-- **gends.py** → Eğitim için veri üretir / hazırlar.
-- **generate_n_window_dataset_for_fullpredict.py** → Kaynak verilerden "n-window" veri seti oluşturur.
-- **performance_metrics.py** → F1, Accuracy gibi metrik hesaplamalarını yapar.
-- **layers_gcn/** → Özel GCN ve GAT tabanlı katman tanımları:
-  - `graph_attention_cnn_layer.py`
-  - `graph_cnn_layer.py`
-  - `graph_convolutional_recurrent_layer.py`
-  - `multi_graph_attention_cnn_layer.py`
-  - `multi_graph_cnn_layer.py`
-  - `graph_ops.py` → Temel graph operasyonları (adjacency işlemleri vb.)
+Custom graph attention and convolutional layers
 
----
+Sliding window dataset generation
 
-## 🧪 Denemeler ve Sonuçlar
-
-Eğitim tamamlandığında sonuçlar `results/` klasöründe saklanır.  
-Model hiperparametre optimizasyonu **scikit-optimize** ile yapılmaktadır (`gp_minimize`, `forest_minimize`).
-
----
-
-## 📄 Lisans
-
-Bu proje henüz bir lisans dosyası içermiyor. Lütfen lisans bilgilerini ekleyin.
+📄 License
+This project is currently unlicensed. Please contact the author for usage permissions. (Article information will be added)
